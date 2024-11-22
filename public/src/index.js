@@ -8,7 +8,9 @@ boton.addEventListener('click', ()=>{
     boton.style.display='none';
     btn.style.display="block";
 })
-
+document.getElementById('ingresar').addEventListener('click', function () {
+    window.location.href = './login.html'; 
+});
 let salir = document.querySelector('#salir')
 salir.addEventListener('click', ()=>{
     let btn = document.querySelector('#user')

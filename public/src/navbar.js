@@ -24,7 +24,7 @@ const navbar =
                 </li>
             </ul>
             <div>
-                <button id="ingresar" class="btn btn-outline-success" type="submit">Ingresar</button>
+                <button id="ingresar" class="btn btn-outline-success" type="submit" >Ingresar</button>
             </div>
 
             <div id="user">
