@@ -52,40 +52,7 @@ const obtenerDatos = async () => {
   }
 
 }
-
 obtenerDatos();
-
-//   datos.forEach(datos => {
-//     productos +=
-//       `<div class="card border border-1 border-dark d-flex flex-column align-items-center"
-//             style="width: 100%; max-width: 300px; margin:30px">
-//             <img src="${datos.imagen}" class="card-img-top" alt="...">
-//             <div class="card-body ">
-//                 <h4>${datos.titulo}</h4>
-//                 <p class="card-text ">${datos.descripcion}</p>
-//             </div>
-// <div class="d-flex justify-content-between align-items-center w-100 mb-2 px-2">
-//   <p class="card-text border border-secondary rounded p-2 mb-0">
-//     <strong>${datos.precio}</strong>
-//   </p>
-//   <div class="d-flex ms-auto">
-//     <a onclick="editar(${datos.id})" href="#prodEditar" class="btn btn-outline-warning me-2 edit">
-//       <i class="bi bi-pencil"></i>
-//     </a>
-//     <a onclick="eliminar(${datos.id})" class="btn btn-outline-danger" type="submit">
-//       <i class="bi bi-trash"></i>
-//     </a>
-//   </div>
-// </div>
-
-
-//         </div>`
-//   })
-//   contenedor.innerHTML = productos
-
-// Añadir event listeners a los botones "Editar"
-
-
 
 const formulario = document.forms['formAñadir']
 console.log(formulario)
@@ -176,72 +143,6 @@ const eliminar = (id) => {
   }
 
 }
-
-// const formEditar = document.forms['formEditar']
-// const editar = (id) => {
-//   const formulario = document.getElementById('prodEditar');
-//   formulario.classList.toggle('newE');
-//   console.log(id)
-//   //Contenedor de datos del producto
-//   let prodEditar = {}
-//   productosRecibidos.filter(prod => {
-//     if (prod.id == id) {
-//       prodEditar = prod
-//       console.log(prodEditar)
-//     }
-
-//   })
-//   //asigno los valores a los campos del formulario
-//   formEditar.idEditar.value = prodEditar.id
-//   formEditar.titulo.value = prodEditar.titulo
-//   formEditar.descripcion.value = prodEditar.descripcion
-//   formEditar.precio.value = prodEditar.precio
-// }
-
-// formEditar.addEventListener('submit', (event) => {
-//   event.preventDefault();
-//   //creo objeto con nuevos datos
-//   const nuevosDatos = {
-//     id: formEditar.idEditar.value,
-//     titulo: formEditar.titulo.value,
-//     descripcion: formEditar.descripcion.value,
-//     precio: formEditar.precio.value
-//   }
-
-//   if (!nuevosDatos.titulo || !nuevosDatos.descripcion || !nuevosDatos.precio) {
-//     document.querySelector('#mensajeEditar').innerHTML = 'Modificando'
-//     return
-//   }
-//   else {
-//     document.querySelector('#mensajeEditar').innerHTML = '*No hay datos que modificar'
-//     // return
-//   }
-//   //valudacion de campos vacios igual anterior
-//   let nuevosDatosJson = JSON.stringify(nuevosDatos)
-//   console.log(nuevosDatosJson)
-
-//   const enviarNuevosDatos = async() => {
-//     try {
-//       const res = await fetch(endpoint + '/' + id, {
-//         method: 'put',
-//         headers: {
-//           'content-type': 'apliction/json'
-//         },
-//         body: nuevosDatosJson
-//       })
-//       const respuesta = await enviarDatos.json()
-//       console.log(respuesta)
-//       mostrarMensaje(respuesta.mensajeEditar) //mensajeEditar
-//     }
-//     catch (error) {
-//       mostrarMensaje('error al modificar datos')
-//     }
-//     setTimeout(() => {
-//       location.reload();
-//     }, 2500)
-//   }
-//   enviarNuevosDatos();
-// })
 
 const formEditar = document.forms['formEditar'];
 const editar = (id) => {

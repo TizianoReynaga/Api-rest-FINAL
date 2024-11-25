@@ -19,7 +19,5 @@ salir.addEventListener('click', ()=>{
     btn.style.display="none";
 
 })
-
 import {footer} from './footer.js'
-
 document.querySelector('#contF').innerHTML = footer
