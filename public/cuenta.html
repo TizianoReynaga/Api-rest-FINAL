@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header Nav (ya implementado en navbar.js) -->
+        <header>
+            <div class="pt-3">
+                <a href="index.html" style="text-decoration: none; color: black;"><span>Volver al inicio</span></a>
+            </div>
+        </header>
+    </div>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Opciones de Cuenta</h1>
+        <div class="w-50 mx-auto">
+            <!-- Formulario para cambiar contraseña -->
+            <form id="form-cambiar-contrasena">
+                <div class="mb-3">
+                    <label for="correo" class="form-label">Correo</label>
+                    <input type="email" class="form-control" id="correo" placeholder="Tu correo" required>
+                </div>
+                <div class="mb-3">
+                    <label for="contrasena-actual" class="form-label">Contraseña Actual</label>
+                    <input type="password" class="form-control" id="contrasena-actual" placeholder="Contraseña actual"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label for="nueva-contrasena" class="form-label">Nueva Contraseña</label>
+                    <input type="password" class="form-control" id="nueva-contrasena" placeholder="Nueva contraseña"
+                        required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Actualizar Contraseña</button>
+            </form>
+
+            <!-- Botón para eliminar la cuenta -->
+            <button class="btn btn-danger mt-3 w-100" id="eliminar-cuenta">Eliminar Cuenta</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JS para manejar eventos -->
+    <script>
+        // Cambiar contraseña
+        document.getElementById('form-cambiar-contrasena').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const correo = document.getElementById('correo').value;
+            const contrasenaActual = document.getElementById('contrasena-actual').value;
+            const nuevaContrasena = document.getElementById('nueva-contrasena').value;
+
+            try {
+                const response = await fetch('/cambiar-contrasena', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ correo, contrasenaActual, nuevaContrasena }),
+                });
+
+                const result = await response.text();
+                alert(result);
+            } catch (error) {
+                alert('Ocurrió un error al actualizar la contraseña.');
+            }
+        });
+
+        // Eliminar cuenta
+        document.getElementById('eliminar-cuenta').addEventListener('click', async () => {
+            const correo = prompt('Ingresa tu correo para confirmar:');
+            if (!correo) return;
+
+            try {
+                const response = await fetch('/eliminar-cuenta', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ correo }),
+                });
+
+                const result = await response.text();
+                alert(result);
+                if (result === 'Cuenta eliminada exitosamente') {
+                    window.location.href = './index.html';
+                }
+            } catch (error) {
+                alert('Ocurrió un error al eliminar la cuenta.');
+            }
+        });
+    </script>
+</body>
+
+</html>
