@@ -100,3 +100,59 @@ app.delete('/productos/:id', (req, res) => {
 app.listen(port, () => {
     console.log(`Servidor corriendo en puerto ${port}`)
 });
+
+app.post('/login', (req, res) => {
+    const { correo, contraseña } = req.body;
+
+    const query = 'SELECT id FROM usuarios WHERE correo = ? AND contraseña = ?';
+    db.query(query, [correo, contraseña], (err, results) => { // Cambia conexion por db
+        if (err) {
+            console.error('Error al realizar la consulta:', err);
+            return res.status(500).json({ message: 'Error en el servidor.' });
+        }
+
+        if (results.length > 0) {
+            const user = results[0];
+            // Redirige según el ID del usuario
+            return res.json({
+                message: 'Inicio de sesión exitoso.',
+                redirectTo: user.id === 1 ? '/productosAdmin.html' : '/productos.html',
+            });
+        }
+
+        // Si las credenciales son incorrectas
+        res.status(401).json({ message: 'Usuario o contraseña incorrectos.' });
+    });
+});
+
+app.post('/register', (req, res) => {
+    const { nombre, correo, contraseña } = req.body;
+
+    // Verifica si el correo ya existe en la base de datos
+    const checkQuery = 'SELECT id FROM usuarios WHERE correo = ?';
+    db.query(checkQuery, [correo], (err, results) => {
+        if (err) {
+            console.error('Error al verificar el correo:', err);
+            return res.status(500).json({ message: 'Error en el servidor.' });
+        }
+
+        if (results.length > 0) {
+            return res.status(400).json({ message: 'El correo ya está registrado.' });
+        }
+
+        // Inserta el nuevo usuario en la base de datos
+        const insertQuery = 'INSERT INTO usuarios (nombre, correo, contraseña) VALUES (?, ?, ?)';
+        db.query(insertQuery, [nombre, correo, contraseña], (err) => {
+            if (err) {
+                console.error('Error al registrar el usuario:', err);
+                return res.status(500).json({ message: 'Error en el servidor.' });
+            }
+
+            res.status(201).json({ message: 'Usuario registrado exitosamente.' });
+        });
+    });
+});
+
+
+
+
