@@ -4,7 +4,7 @@ document.getElementById('registrarse').addEventListener('click', function () {
 const form = document.getElementById('formLogin');
 form.addEventListener('submit', async (e) => {
     e.preventDefault(); // Evita que se recargue la página automáticamente
-    
+
     const correo = document.getElementById('email').value;
     const contraseña = document.getElementById('password').value;
 

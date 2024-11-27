@@ -101,7 +101,7 @@ app.post('/login', (req, res) => {
     const query = 'SELECT id FROM usuarios WHERE correo = ? AND contrasena = ?';
     db.query(query, [correo, contraseña], (err, results) => { // Cambia conexion por db
         if (err) {
-            console.error('Error al realizar la consulta:', err); 
+            console.error('Error al realizar la consulta:', err);
             return res.status(500).json({ message: 'Error en el servidor.' });
         }
 
@@ -149,37 +149,37 @@ app.post('/register', (req, res) => {
 
 app.post('/cambiar-contrasena', (req, res) => {
     const { correo, contrasenaActual, nuevaContrasena } = req.body;
-  
+
     // Verificar contraseña actual
     const query = 'SELECT Contrasena FROM usuarios WHERE correo = ?';
     db.query(query, [correo], (err, results) => {
-      if (err) return res.status(500).send('Error en el servidor');
-      if (results.length === 0) return res.status(400).send('Usuario no encontrado');
-      if (results[0].Contrasena !== contrasenaActual) {
-        return res.status(400).send('Contraseña actual incorrecta');
-      }
-  
-      // Actualizar con la nueva contraseña
-      const updateQuery = 'UPDATE usuarios SET contrasena = ? WHERE Correo = ?';
-      db.query(updateQuery, [nuevaContrasena, correo], (err) => {
-        if (err) return res.status(500).send('Error al actualizar la contraseña');
-        res.send('Contraseña actualizada exitosamente');
-      });
+        if (err) return res.status(500).send('Error en el servidor');
+        if (results.length === 0) return res.status(400).send('Usuario no encontrado');
+        if (results[0].Contrasena !== contrasenaActual) {
+            return res.status(400).send('Contraseña actual incorrecta');
+        }
+
+        // Actualizar con la nueva contraseña
+        const updateQuery = 'UPDATE usuarios SET contrasena = ? WHERE Correo = ?';
+        db.query(updateQuery, [nuevaContrasena, correo], (err) => {
+            if (err) return res.status(500).send('Error al actualizar la contraseña');
+            res.send('Contraseña actualizada exitosamente');
+        });
     });
-  });
-  
-  app.post('/eliminar-cuenta', (req, res) => {
+});
+
+app.post('/eliminar-cuenta', (req, res) => {
     const { correo } = req.body;
-  
+
     const query = 'DELETE FROM usuarios WHERE correo = ?';
     db.query(query, [correo], (err, results) => {
-      if (err) return res.status(500).send('Error en el servidor');
-      if (results.affectedRows === 0) return res.status(400).send('Usuario no encontrado');
-      res.send('Cuenta eliminada exitosamente');
+        if (err) return res.status(500).send('Error en el servidor');
+        if (results.affectedRows === 0) return res.status(400).send('Usuario no encontrado');
+        res.send('Cuenta eliminada exitosamente');
     });
-  });
-  
+});
 
-  app.listen(port, () => {
+
+app.listen(port, () => {
     console.log(`Servidor corriendo en puerto ${port}`)
 });

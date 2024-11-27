@@ -48,5 +48,5 @@ const navbar =
                         </div>
                     </div>
                 </div>
-            </nav>` 
-            export {navbar} 
+            </nav>`
+export { navbar } 

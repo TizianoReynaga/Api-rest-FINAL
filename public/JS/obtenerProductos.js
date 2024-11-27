@@ -7,8 +7,8 @@ const mostrarProductos = (datos) => {
     let productos = ''
     const contenedor = document.querySelector('#contProduc')
     datos.forEach(datos => {
-        productos += 
-        `<div class="card border border-1 border-dark d-flex flex-column align-items-center"
+        productos +=
+            `<div class="card border border-1 border-dark d-flex flex-column align-items-center"
             style="width: 100%; max-width: 300px; margin:30px">
             <img src= "./img/${datos.imagen}" class="card-img-top" alt="...">
             <div class="card-body ">
