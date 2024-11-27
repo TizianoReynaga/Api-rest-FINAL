@@ -13,7 +13,7 @@ document.getElementById('registrarse').addEventListener('click', async () => {
     }
 
     try {
-        const response = await fetch('https://tienda-online-final.onrender.com/registro', {
+        const response = await fetch('https://tienda-online-final.onrender.com/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nombre, correo, contraseña }),
