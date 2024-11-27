@@ -5,7 +5,7 @@ const fs = require('fs') //Permite trabajar con archivos (file system) incluida 
 const cors = require('cors');
 require('dotenv/config')
 const app = express();
-const port = process.env.MYSQL_ADDON_PORT || 3000
+const port = 3000
 
 //Middleware
 app.use(express.json())
@@ -14,7 +14,7 @@ app.use(cors())
 
 
 app.get('/productos', (req, res) => {
-    // res.send('Listado de productos')
+    // res.send('Listado deF productos')
 
     const sql = "SELECT * FROM productos"
     db.query(sql, (err, result) => {
@@ -94,9 +94,6 @@ app.delete('/productos/:id', (req, res) => {
 
 })
 
-app.listen(port, () => {
-    console.log(`Servidor corriendo en puerto ${port}`)
-});
 
 app.post('/login', (req, res) => {
     const { correo, contraseña } = req.body;
@@ -182,3 +179,7 @@ app.post('/cambiar-contrasena', (req, res) => {
     });
   });
   
+
+  app.listen(port, () => {
+    console.log(`Servidor corriendo en puerto ${port}`)
+});

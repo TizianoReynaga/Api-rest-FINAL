@@ -5,9 +5,17 @@ const conexion = mysql.createConnection({
     user: process.env.MYSQL_ADDON_USER || "root",
     password: process.env.MYSQL_ADDON_PASSWORD || "",
     database: process.env.MYSQL_ADDON_DB || "tienda",  // Cambia 'tienda' por el nombre de tu base de datos si es necesario
-    port: process.env.MYSQL_ADDON_PORT || 3306,  // Asegúrate de usar el puerto correcto, por defecto es 3306
+    port: process.env.MYSQL_ADDON_PORT || 3006,  // Asegúrate de usar el puerto correcto, por defecto es 3306
     connectionLimit: 5
 });
+
+// const conexion = mysql.createConnection({
+//   host: 'localhost',
+//   user: 'root',
+//   password: '',
+//   database: 'tienda',
+// });
+
 
 conexion.connect((err) => {
     if (err) {

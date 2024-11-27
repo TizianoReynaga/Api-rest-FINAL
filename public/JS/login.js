@@ -9,7 +9,8 @@ form.addEventListener('submit', async (e) => {
     const contraseña = document.getElementById('password').value;
 
     try {
-        const response = await fetch('http://localhost:3000/login', {
+        // const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch('https://tienda-online-final.onrender.com/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ correo, contraseña }),
